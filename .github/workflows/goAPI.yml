@@ -5,14 +5,14 @@ on:
 
 jobs:
   test:
-    name: Test
+    runs-on: ubuntu-latest
     steps:
-      - name: Go Test
-        uses: calebtracey/devops/templates/.github/workflows/test.yml
-      - name: Lint
-        uses: calebtracey/devops/templates/.github/workflows/lint.yml
-      - name: Analyze
-        uses: calebtracey/devops/templates/.github/workflows/codeql.yml
+    - name: Go Test
+      uses: ./.github/workflows/test.yml
+    - name: Lint
+      uses: ./.github/workflows/lint.yml
+    - name: Analyze
+      uses: ./.github/workflows/codeql.yml
   build:
     name: Build Image
     uses: calebtracey/devops/templates/.github/workflows/build.yml
