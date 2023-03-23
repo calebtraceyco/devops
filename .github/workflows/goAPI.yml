@@ -8,18 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Go Test
-      uses: ./.github/workflows/test.yml
+      uses: ./.github/actions/test.yml
     - name: Lint
-      uses: ./.github/workflows/lint.yml
+      uses: ./.github/actions/lint.yml
     - name: Analyze
-      uses: ./.github/workflows/codeql.yml
+      uses: ./.github/actions/codeql.yml
   build:
     runs-on: ubuntu-latest
     name: Build Image
-    uses: calebtracey/devops/templates/.github/workflows/build.yml
+    uses: ./.github/actions/build.yml
     needs: [ test, lint, analyze ]
   push:
     runs-on: ubuntu-latest
     name: Push Image
-    uses: calebtracey/devops/templates/.github/workflows/push.yml
+    uses: ./.github/actions/push.yml
     needs: build
