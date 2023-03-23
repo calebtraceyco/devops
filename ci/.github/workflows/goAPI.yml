@@ -1,0 +1,23 @@
+name: Go API Workflow CI
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    name: Test
+    steps:
+      - name: Go Test
+        uses: calebtracey/devops/.github/workflows/test.yml
+      - name: Lint
+        uses: calebtracey/devops/.github/workflows/lint.yml
+      - name: Analyze
+        uses: calebtracey/devops/.github/workflows/codeql.yml
+  build:
+    name: Build Image
+    uses: calebtracey/devops/.github/workflows/build.yml
+    needs: [ test, lint, analyze ]
+  push:
+    name: Push Image
+    uses: calebtracey/devops/.github/workflows/push.yml
+    needs: build
