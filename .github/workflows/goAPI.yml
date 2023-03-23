@@ -4,36 +4,35 @@ on:
     branches:
       - main
 jobs:
+  # TEST STAGE
   test:
     runs-on: ubuntu-latest
-    steps:
-      # check out repository source code to workflow
-      - name: Checkout Source Repo
-        uses: actions/checkout@v3
-        with:
-          repository: calebtraceyco/devops
-          ref: main
-      - name: Test
-        uses: peter-evans/workflow-dispatch@v2
-        with:
-          token: ${{ secrets.PAT }}
-          repository: calebtraceyco/devops
-          workflow: test.yml
-          ref: main
-      - name: Lint
-        uses: peter-evans/workflow-dispatch@v2
-        with:
-          token: ${{ secrets.PAT }}
-          repository: calebtraceyco/devops
-          workflow: lint.yml
-          ref: main
-      - name: Analyze
-        uses: peter-evans/workflow-dispatch@v2
-        with:
-          token: ${{ secrets.PAT }}
-          repository: calebtraceyco/devops
-          workflow: codeql.yml
-          ref: main
+    name: Go Test
+    uses: peter-evans/workflow-dispatch@v2
+    with:
+      token: ${{ secrets.PAT }}
+      repository: calebtraceyco/devops
+      workflow: test.yml
+      ref: main
+  lint:
+    runs-on: ubuntu-latest
+    name: Go Lint
+    uses: peter-evans/workflow-dispatch@v2
+    with:
+      token: ${{ secrets.PAT }}
+      repository: calebtraceyco/devops
+      workflow: codeql.yml
+      ref: main
+  analysis:
+    runs-on: ubuntu-latest
+    name: Analyze Code
+    uses: peter-evans/workflow-dispatch@v2
+    with:
+      token: ${{ secrets.PAT }}
+      repository: calebtraceyco/devops
+      workflow: codeql.yml
+      ref: main
+  # BUILD STAGE
   build:
     runs-on: ubuntu-latest
     name: Build Image
@@ -44,6 +43,7 @@ jobs:
       workflow: build.yml
       ref: main
     needs: [ test, lint, analyze ]
+  # PUSH IMAGE STAGE
   push:
     runs-on: ubuntu-latest
     name: Push Image
