@@ -39,7 +39,7 @@ jobs:
     name: Build Image
     uses: peter-evans/workflow-dispatch@v2
     with:
-      token: %{{ secrets.PAT }}
+      token: ${{ secrets.PAT }}
       repository: calebtraceyco/devops
       workflow: build.yml
       ref: main
@@ -49,7 +49,7 @@ jobs:
     name: Push Image
     uses: peter-evans/workflow-dispatch@v2
     with:
-      token: %{{ secrets.PAT }}
+      token: ${{ secrets.PAT }}
       repository: calebtraceyco/devops
       workflow: push.yml
       ref: main
