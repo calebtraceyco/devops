@@ -14,10 +14,12 @@ jobs:
     - name: Analyze
       uses: ./.github/workflows/codeql.yml
   build:
+    runs-on: ubuntu-latest
     name: Build Image
     uses: calebtracey/devops/templates/.github/workflows/build.yml
     needs: [ test, lint, analyze ]
   push:
+    runs-on: ubuntu-latest
     name: Push Image
     uses: calebtracey/devops/templates/.github/workflows/push.yml
     needs: build
