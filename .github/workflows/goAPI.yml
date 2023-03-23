@@ -23,14 +23,14 @@ jobs:
       - name: Lint
         uses: peter-evans/workflow-dispatch@v2
         with:
-          token: %{{ secrets.PAT }}
+          token: ${{ secrets.PAT }}
           repository: calebtraceyco/devops
           workflow: lint.yml
           ref: main
       - name: Analyze
         uses: peter-evans/workflow-dispatch@v2
         with:
-          token: %{{ secrets.PAT }}
+          token: ${{ secrets.PAT }}
           repository: calebtraceyco/devops
           workflow: codeql.yml
           ref: main
