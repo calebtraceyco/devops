@@ -5,6 +5,7 @@ on:
 
 jobs:
   go-test:
+    name: Go Test
     runs-on: ubuntu-latest
     permissions:
       actions: read

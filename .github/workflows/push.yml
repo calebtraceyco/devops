@@ -5,7 +5,7 @@ on:
 
 jobs:
   push-image:
-    needs: build
+    name: Docker Push Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
