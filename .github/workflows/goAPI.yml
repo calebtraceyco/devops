@@ -1,25 +1,56 @@
-name: Go API Workflow CI
-
+name: Go API Workflow
 on:
-  workflow_call:
-
+  push:
+    branches:
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Go Test
-      uses: ./.github/actions/test.yml
-    - name: Lint
-      uses: ./.github/actions/lint.yml
-    - name: Analyze
-      uses: ./.github/actions/codeql.yml
+      # check out repository source code to workflow
+      - name: Checkout Source Repo
+        uses: actions/checkout@v3
+        with:
+          repository: calebtraceyco/devops
+          ref: main
+      - name: Test
+        uses: peter-evans/workflow-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          repository: calebtraceyco/devops
+          workflow: test.yml
+          ref: main
+      - name: Lint
+        uses: peter-evans/workflow-dispatch@v2
+        with:
+          token: %{{ secrets.PAT }}
+          repository: calebtraceyco/devops
+          workflow: lint.yml
+          ref: main
+      - name: Analyze
+        uses: peter-evans/workflow-dispatch@v2
+        with:
+          token: %{{ secrets.PAT }}
+          repository: calebtraceyco/devops
+          workflow: codeql.yml
+          ref: main
   build:
     runs-on: ubuntu-latest
     name: Build Image
-    uses: ./.github/actions/build.yml
+    uses: peter-evans/workflow-dispatch@v2
+    with:
+      token: %{{ secrets.PAT }}
+      repository: calebtraceyco/devops
+      workflow: build.yml
+      ref: main
     needs: [ test, lint, analyze ]
   push:
     runs-on: ubuntu-latest
     name: Push Image
-    uses: ./.github/actions/push.yml
+    uses: peter-evans/workflow-dispatch@v2
+    with:
+      token: %{{ secrets.PAT }}
+      repository: calebtraceyco/devops
+      workflow: push.yml
+      ref: main
     needs: build
