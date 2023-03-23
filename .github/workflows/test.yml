@@ -1,5 +1,4 @@
 name: Test
-
 runs:
   steps:
     - uses: actions/checkout@v3

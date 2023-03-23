@@ -1,5 +1,4 @@
 name: CodeQL
-
 runs:
   steps:
     - name: Checkout repository
