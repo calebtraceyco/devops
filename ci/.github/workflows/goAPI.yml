@@ -8,16 +8,16 @@ jobs:
     name: Test
     steps:
       - name: Go Test
-        uses: calebtracey/devops/.github/workflows/test.yml
+        uses: calebtracey/devops/templates/.github/workflows/test.yml
       - name: Lint
-        uses: calebtracey/devops/.github/workflows/lint.yml
+        uses: calebtracey/devops/templates/.github/workflows/lint.yml
       - name: Analyze
-        uses: calebtracey/devops/.github/workflows/codeql.yml
+        uses: calebtracey/devops/templates/.github/workflows/codeql.yml
   build:
     name: Build Image
-    uses: calebtracey/devops/.github/workflows/build.yml
+    uses: calebtracey/devops/templates/.github/workflows/build.yml
     needs: [ test, lint, analyze ]
   push:
     name: Push Image
-    uses: calebtracey/devops/.github/workflows/push.yml
+    uses: calebtracey/devops/templates/.github/workflows/push.yml
     needs: build
