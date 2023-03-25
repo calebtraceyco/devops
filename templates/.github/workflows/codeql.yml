@@ -1,5 +1,12 @@
 name: codeql
 on:
+  push:
+    branches:
+      - MYB-*
+      - main
+  pull_request:
+    branches:
+      - main
   workflow_call:
 jobs:
   analyze:
