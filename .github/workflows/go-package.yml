@@ -1,10 +1,17 @@
 name: Go Package Workflow
 on:
+  push:
+    branches:
+      - MYB-*
+      - main
+  pull_request:
+    branches:
+      - main
   workflow_call:
 jobs:
   test:
-    uses: calebtraceyco/.github/workflows/go-test.yml@main
+    uses: ./.github/workflows/go-test.yml
   lint:
-    uses: calebtraceyco/.github/workflows/go-lint.yml@main
+    uses: ./.github/workflows/go-lint.yml
   analyze:
-    uses: calebtraceyco/.github/workflows/codeql.yml@main
+    uses: ./.github/workflows/codeql.yml
