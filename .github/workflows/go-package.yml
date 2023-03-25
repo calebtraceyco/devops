@@ -10,8 +10,8 @@ on:
   workflow_call:
 jobs:
   test:
-    uses: workflows/go-test.yml
+    uses: workflows/go-test.yml@main
   lint:
-    uses: workflows/go-lint.yml
+    uses: workflows/go-lint.yml@main
   analyze:
-    uses: workflows/codeql.yml
+    uses: workflows/codeql.yml@main
