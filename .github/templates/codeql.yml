@@ -1,4 +1,6 @@
 name: codeql
+on:
+  workflow_call:
 jobs:
   analyze:
     name: Analyze Code

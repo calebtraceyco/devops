@@ -1,0 +1,11 @@
+{
+  "name": "Go Package Workflow",
+  "description": "Organization CI starter workflow.",
+  "categories": [
+    "Go"
+  ],
+  "filePatterns": [
+    "^Dockerfile",
+    ".*\\.md$"
+  ]
+}

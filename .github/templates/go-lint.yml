@@ -2,6 +2,8 @@ name: go-lint
 permissions:
   contents: read
   pull-requests: read
+on:
+  workflow_call:
 jobs:
   lint:
     name: Go Lint
