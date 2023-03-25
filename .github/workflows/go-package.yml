@@ -3,8 +3,8 @@ on:
   workflow_call:
 jobs:
   test:
-    uses: calebtraceyco/devops/templates/.github/workflows/go-test.yml@main
+    uses: ./templates/.github/workflows/go-test.yml
   lint:
-    uses: calebtraceyco/devops/templates/.github/workflows/go-lint.yml@main
+    uses: ./templates/.github/workflows/go-lint.yml
   analyze:
-    uses: calebtraceyco/devops/templates/.github/workflows/codeql.yml@main
+    uses: ./templates/.github/workflows/codeql.yml
