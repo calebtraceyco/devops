@@ -1,6 +1,6 @@
 name: Go Package Workflow
 on:
-  workflow_dispatch:
+  workflow_call:
 jobs:
   ci-workflow:
     name: ci-workflow
